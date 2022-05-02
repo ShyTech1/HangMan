@@ -10,7 +10,7 @@ def choose_word():
     return RandomWord().word()
 
 
-def check_valid_input(letter_guessed, old_letters_guessed):
+def check_valid_input(letter_guessed, old_letters_guessed) -> bool:
     """chack input.
     return : bool
     valid input:  one english letter only."""
@@ -23,15 +23,14 @@ def check_valid_input(letter_guessed, old_letters_guessed):
     invalid_input = (
         (len(letter_guessed)) > 1  # letter_guessed is bigger than 1
         or not letter_guessed.isalpha()  # letter_guessed is not an alphabeit chr
+        or letter_guessed in old_letters_guessed
     )
 
-    if valid_input:
+    if valid_input :
         return True
-    elif invalid_input:
+    elif invalid_input :
         return False
-    if letter_guessed in old_letters_guessed:
-        print(f'{letter_guessed} is already guessed')# todo check if this line is necessary.
-        return False
+
 
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
     """if valid input, add to old_letter_guessed, return True
@@ -39,18 +38,16 @@ def try_update_letter_guessed(letter_guessed, old_letters_guessed):
 
     letter_guessed = letter_guessed.lower()
 
-    if check_valid_input(letter_guessed, old_letters_guessed) == False:
+    if not check_valid_input(letter_guessed, old_letters_guessed):
         old_letters_guessed.sort()
-        print('[ THIS IS NOT A VALID INPUT ]', old_letters_guessed.sort())
         return False
 
-    elif check_valid_input(letter_guessed, old_letters_guessed) == True:
+    else:
         old_letters_guessed.append(letter_guessed)
-        print('[ THIS IS A VALID INPUT ]')
         return True
 
 
-def is_letter_in_secret_word(letter_guessed, secret_word):
+def is_letter_in_secret_word(letter_guessed, secret_word) -> bool:
     """ check if the guessed letter in the secret word
     return: bool"""
 
@@ -59,14 +56,14 @@ def is_letter_in_secret_word(letter_guessed, secret_word):
     return False
 
 
-def update_hidden_word(secret_word, old_letters_guessed):
+def update_hidden_word(secret_word, old_letters_guessed) -> str:
     """represent to the user his progress in the game.
     secret_word - the word should be guessed
     old_letters_guessed - list of guessed letters
     return a string with the letter's guessed separated by underscore
     return_type: str"""
 
-    return ''.join([x if x in old_letters_guessed else '_' for x in secret_word])
+    return ' '.join([x if x in old_letters_guessed else '_' for x in secret_word])
 
 
 def check_win(secret_word, old_letters_guessed):
@@ -81,13 +78,12 @@ def check_win(secret_word, old_letters_guessed):
         return False
 
 
-def clean_sceen(num_of_tries, secret_word, old_letters_guessed):
+def clean_screen(num_of_tries, secret_word, old_letters_guessed):
 
     os.system('cls||clear')
     ac.hangman_start_screen()
     print(ac.hangman_level(num_of_tries))
-    print(update_hidden_word(secret_word, old_letters_guessed))
-    print(f'letters guessed: {sorted(old_letters_guessed)}\n')
+    print(f'letters guessed> {sorted(old_letters_guessed)}\n')
 
 
 def win_clean(num_of_tries):
@@ -96,3 +92,6 @@ def win_clean(num_of_tries):
     ac.hangman_level(num_of_tries)
     print(ac.win_art())
 
+def game_over_screen():
+    again = input("would you like to play again?[Y/N] ")
+    return True if again == "Y".lower() else quit()

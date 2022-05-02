@@ -14,9 +14,17 @@ def hangman_start_screen():
 
 def hangman_level(num_of_tries):
 
-    first = """
+    zero = """
     x-------x
     |
+    |
+    |
+    |
+    |"""
+
+    first = """
+    x-------x
+    |       |
     |
     |
     |
@@ -25,48 +33,47 @@ def hangman_level(num_of_tries):
     second = """
     x-------x
     |       |
+    |       O
     |
     |
+    |"""
+    third = """    x-------x
+    |       |
+    |       O
+    |       |
     |
     |"""
 
-    third = """
-    x-------x
-    |       |
-    |       0
-    |
-    |
-    |"""
     fourth = """    x-------x
     |       |
-    |       0
-    |       |
+    |       O
+    |      /|
     |
     |"""
 
-    fith = """    x-------x
+    fith = r"""    x-------x
     |       |
-    |       0
-    |      /|\\
-    |
+    |       O
+    |      /|\
+    |      
     |"""
 
-    sixth = """    x-------x
+    sixth = r"""    x-------x
     |       |
-    |       0
-    |      /|\\
-    |      /
+    |       O
+    |      /|\
+    |      / 
     |"""
 
-    sevens = """    x-------x
-    |       |
-    |       0
-    |      /|\\
-    |      / \\
-    |"""
+    sevens = r"""    x-------x
+     |       |
+     |       O
+     |      /|\
+     |      /|\
+     |"""
 
-    HANGMAN_PHOTOS = {0: first, 1: second, 2: third,
-                      3: fourth, 4: fith, 5: sixth, 6: sevens}
+    HANGMAN_PHOTOS = {0: zero, 1: first, 2: second, 3: third,
+                      4: fourth, 5: fith, 6: sixth, 7: sevens}
     return f'this is your man:\n {HANGMAN_PHOTOS[num_of_tries]}\n'
 
 
