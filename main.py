@@ -11,14 +11,20 @@ def main():
     game_over = False
 
     while num_of_tries <= 6:
-        #get an input from the user
+        # get an input from the user
         while True:
-            letter_guessed = input("guess a letter")
+            letter_guessed = input("guess a letter: ")
+            if letter_guessed == "hint":
+                print(secret_word)
+                input()
             clean_screen(num_of_tries, secret_word, old_letters_guessed)
-        #check valid input
+        # check valid input
             if try_update_letter_guessed(letter_guessed, old_letters_guessed) == True:
-                user_progress = update_hidden_word(secret_word, old_letters_guessed)
+                user_progress = update_hidden_word(
+                    secret_word, old_letters_guessed)
                 break
+            else:
+                print(user_progress)
 
         if not is_letter_in_secret_word(letter_guessed, secret_word):
             num_of_tries += 1
@@ -36,10 +42,9 @@ def main():
             if __name__ == "__main__":
                 main()
 
-
-        #update old letters guessed
-        #update secret word
-        #check win
+        # update old letters guessed
+        # update secret word
+        # check win
 
 
 if __name__ == "__main__":
