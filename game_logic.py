@@ -26,9 +26,9 @@ def check_valid_input(letter_guessed, old_letters_guessed) -> bool:
         or letter_guessed in old_letters_guessed
     )
 
-    if valid_input :
+    if valid_input:
         return True
-    elif invalid_input :
+    elif invalid_input:
         return False
 
 
@@ -91,6 +91,7 @@ def win_clean(num_of_tries):
     ac.hangman_start_screen()
     ac.hangman_level(num_of_tries)
     print(ac.win_art())
+
 
 def game_over_screen():
     again = input("would you like to play again?[Y/N] ")
