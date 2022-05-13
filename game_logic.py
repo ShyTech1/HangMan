@@ -70,8 +70,8 @@ def check_win(secret_word, old_letters_guessed):
     """check if the user guessed the word
     return: bool
     """
-    show_list = update_hidden_word(secret_word, old_letters_guessed)
-
+    show_list = update_hidden_word(
+        secret_word, old_letters_guessed).replace(" ", "")
     if show_list == secret_word:
         return True
     else:
@@ -82,6 +82,7 @@ def clean_screen(num_of_tries, secret_word, old_letters_guessed):
 
     os.system('cls||clear')
     ac.hangman_start_screen()
+    print(ac.hangman_start_screen())
     print(ac.hangman_level(num_of_tries))
     print(f'letters guessed> {sorted(old_letters_guessed)}\n')
 
@@ -94,5 +95,6 @@ def win_clean(num_of_tries):
 
 
 def game_over_screen():
+    print(ac.lose_art())
     again = input("would you like to play again?[Y/N] ")
     return True if again == "Y".lower() else quit()
