@@ -2,7 +2,6 @@ from game_logic import *
 import os
 from hangman_ascii_art import *
 
-
 def main():
     num_of_tries = 0
     secret_word = choose_word()
@@ -30,11 +29,12 @@ def main():
         if not is_letter_in_secret_word(letter_guessed, secret_word):
             num_of_tries += 1
         clean_screen(num_of_tries, secret_word, old_letters_guessed)
-
+        print(secret_word)
         print(user_progress)
-        if check_win(secret_word, old_letters_guessed):
-            game_over = True
-            win_clean(num_of_tries)
+        game_over = True if check_win(secret_word, old_letters_guessed) else False
+        print("game over", game_over, check_win(secret_word, old_letters_guessed))
+        if game_over:
+            win_clean()
             break
     game_over = True
     if game_over:
